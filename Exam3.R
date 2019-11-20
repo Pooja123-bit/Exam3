@@ -138,14 +138,27 @@ w[i,]$tempK <- w[i,]$sd.tempC + 273.15
 ##11. Melt the data. Keep “region” and “tow’ as the id.variables. (5 points)
 wm <- melt(data = , id.vars = c("region","tow"),measure.vars = c("tempF","tempK"))
 
+
+library(reshape2)
+m.vars=c("temp")
+id.vars = c("region","tow")
+dm <- melt(d, id.vars=id.vars, measure.vars=m.vars)
+
+
 ##12. Generate a bar plots showing the 2 standard deviation temperatures in Celsius, 
 ##Fahrenheit, and Kelvin degrees. (5 points)
 
+bar1=ggplot(dm,aes(x=variable, y= value)) +geom_bar(stat = "identity", 
+                            position = "dodge") + facet_grid(.~region)
+bar1
 
-#13. Use faceting to separate the plots by region (column) and tow type (row). Arrange the facets so
-#that they are ordered logically geographically and by depth (i.e., west-central-east, shallow, mid, und). (2.5 points)
+##13. Use faceting to separate the plots by region (column) and tow type (row). 
+##Arrange the facets so that they are ordered logically geographically and by depth
+##(i.e., west-central-east, shallow, mid, und). (2.5 points)
 
 
 
-#14. Plot the values on a log-10 scale. (2.5 points)
+##14. Plot the values on a log-10 scale. (2.5 points)
+bar.2=ggplot(dm,aes(x=variable, y= value)) +
+  geom_bar(stat = "identity", position = "dodge") + facet_grid(.~region) +
 
